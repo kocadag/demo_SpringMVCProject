@@ -1,0 +1,84 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Library",
+		"_postman_id": "f2a05da0-ac04-66ce-6566-1fef520b6441",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Library - Add",
+			"request": {
+				"url": "http://localhost:8090/library/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"BOOKNAME\",\n\t\"surname\" : \"WRITERNAME\"\n}"
+				},
+				"description": "Library - Add"
+			},
+			"response": []
+		},
+		{
+			"name": "Library - Update With Id",
+			"request": {
+				"url": "http://localhost:8090/library/update/3",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"BOOKNAME\",\n\t\"surname\" : \"WRITERNAME\"\n}"
+				},
+				"description": "Library - Update With Id"
+			},
+			"response": []
+		},
+		{
+			"name": "Library - Delete With Id",
+			"request": {
+				"url": "http://localhost:8090/library/delete/3",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Library - Delete With Id"
+			},
+			"response": []
+		},
+		{
+			"name": "Library - List All Library",
+			"request": {
+				"url": "http://localhost:8090/library/list",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Library - List All Library"
+			},
+			"response": []
+		},
+		{
+			"name": "Library - List By Id",
+			"request": {
+				"url": "http://localhost:8090/library/list/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Library - List By Id"
+			},
+			"response": []
+		}
+	]
+}
