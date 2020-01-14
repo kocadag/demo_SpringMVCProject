@@ -41,7 +41,12 @@ public class LibraryController {
 
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.DELETE)
     public boolean deleteLibrary(@PathVariable Long id) {
-        libraryService.deleteLibrary(id);
-        return true;
+        LibraryModel tmp = findById(id);
+        if(null != tmp) {
+            libraryService.deleteLibrary(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
