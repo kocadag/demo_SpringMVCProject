@@ -34,7 +34,8 @@ public class LibraryService {
     }
 
     public LibraryModel findById(Long id) {
-        return libraryRepository.findOne(id);
+        LibraryModel tmpLibraryModel = libraryRepository.findOne(id);
+        return tmpLibraryModel;
     }
 
     public LibraryModel updateLibrary(Long id, LibraryRequest request) {

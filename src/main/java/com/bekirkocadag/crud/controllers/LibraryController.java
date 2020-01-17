@@ -21,38 +21,43 @@ public class LibraryController {
     private final AtomicLong counter = new AtomicLong();
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/library/list")
-    public LibraryModel greeting(@RequestParam(required=false, defaultValue="World") String name) {
+    @GetMapping("/library/**")
+    public LibraryModel greeting(@RequestParam(required=false, defaultValue="Bekir") LibraryModel libraryModel) {
         System.out.println("==== in greeting ====");
-        return new LibraryModel(counter.incrementAndGet(), "book name", "writer name");
+        if(null == libraryModel) {
+            libraryModel.setBookName("");
+            libraryModel.setWriterName("");
+            return new LibraryModel(counter.incrementAndGet(), libraryModel.getBookName(), libraryModel.getWriterName());
+        } else {
+            return new LibraryModel(libraryModel.getId(), libraryModel.getBookName(), libraryModel.getWriterName());
+        }
     }
-
 
 
     @Autowired
     private LibraryService libraryService;
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<LibraryModel> listAllLibrary() {
         return libraryService.findAll();
     }
 
-    @RequestMapping(value = "/list/{id}")
+    @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
     public LibraryModel findById(@PathVariable Long id) {
         return libraryService.findById(id);
     }
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public LibraryModel addLibrary(@RequestBody LibraryRequest request) {
         return libraryService.addLibrary(request);
     }
 
-    @RequestMapping(value = "/update/{id}" , method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public LibraryModel updateLibrary(@PathVariable Long id, @RequestBody LibraryRequest request) {
         return libraryService.updateLibrary(id,request);
     }
 
-    @RequestMapping(value = "/delete/{id}" , method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public boolean deleteLibrary(@PathVariable Long id) {
         LibraryModel tmp = findById(id);
         if(null != tmp) {

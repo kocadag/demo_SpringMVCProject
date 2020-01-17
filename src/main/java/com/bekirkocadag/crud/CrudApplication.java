@@ -62,7 +62,8 @@ public class CrudApplication {
 
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/library/list").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/library/**").allowedOrigins("http://localhost:3000")
+						.allowedMethods("GET", "PUT", "DELETE", "POST");
 			}
 
 			@Override
