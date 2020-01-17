@@ -9,6 +9,15 @@ import javax.persistence.*;
 @Table(name = "library", schema = "library")
 public class LibraryModel {
 
+    public LibraryModel() {
+    }
+
+    public LibraryModel(long id, String bookName, String writerName) {
+        this.id = id;
+        this.bookName = bookName;
+        this.writerName = writerName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
