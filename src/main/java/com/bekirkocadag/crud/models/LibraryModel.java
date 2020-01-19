@@ -18,6 +18,11 @@ public class LibraryModel {
         this.writerName = writerName;
     }
 
+    public LibraryModel(String bookName, String writerName) {
+        this.bookName = bookName;
+        this.writerName = writerName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
