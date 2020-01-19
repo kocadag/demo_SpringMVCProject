@@ -4,10 +4,16 @@ package com.bekirkocadag.crud.controllers;
 import com.bekirkocadag.crud.dtos.LibraryRequest;
 import com.bekirkocadag.crud.models.LibraryModel;
 import com.bekirkocadag.crud.services.LibraryService;
+import com.captcha.botdetect.web.servlet.SimpleCaptcha;
+import com.cedarsoftware.util.io.JsonObject;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -23,16 +29,12 @@ public class LibraryController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/library/**")
     public LibraryModel greeting(@RequestParam(required=false, defaultValue="Bekir") LibraryModel libraryModel) {
-        System.out.println("==== in greeting ====");
         if(null == libraryModel) {
-            libraryModel.setBookName("");
-            libraryModel.setWriterName("");
-            return new LibraryModel(counter.incrementAndGet(), libraryModel.getBookName(), libraryModel.getWriterName());
+            return new LibraryModel(counter.incrementAndGet(), "","");
         } else {
             return new LibraryModel(libraryModel.getId(), libraryModel.getBookName(), libraryModel.getWriterName());
         }
     }
-
 
     @Autowired
     private LibraryService libraryService;
@@ -66,5 +68,46 @@ public class LibraryController {
         } else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/simple-captcha-endpoint",
+            method = RequestMethod.POST,
+            produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String yourFormPostAction(HttpServletRequest request) throws IOException {
+        System.out.println("Bekir");
+/*
+        JsonParser parser = new JsonParser() {
+            @Override
+            public Map<String, Object> parseMap(String json) {
+                return null;
+            }
+
+            @Override
+            public List<Object> parseList(String json) {
+                return null;
+            }
+        };
+        JsonObject formDataObj = (JsonObject) parser.parse(request.getReader());
+
+        String userEnteredCaptchaCode = formDataObj.get("userEnteredCaptchaCode").getAsString();
+        String captchaId = formDataObj.get("captchaId").getAsString();
+
+        // create a captcha instance to be used for the captcha validation
+        SimpleCaptcha yourFirstCaptcha = SimpleCaptcha.load(request);
+        // execute the captcha validation
+        boolean isHuman = yourFirstCaptcha.validate(userEnteredCaptchaCode, captchaId);
+
+        if (isHuman == false) {
+            // captcha validation failed; notify the frontend
+            // consider logging the attempt
+            return "{\"success\":false}";
+        } else {
+            // captcha validation succeeded; execute the protected action
+            // do not forget to notify the frontend about the results
+            return "{\"success\":true}";
+        }
+*/
+        return "{\"success\":true}";
     }
 }
